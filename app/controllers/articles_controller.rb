@@ -6,15 +6,17 @@ class ArticlesController < ApplicationController
 
   def show 
     @article = Article.find(params[:id])
-    end 
+  end 
 
-#   def new 
-#   @article = Article.new
-#   end
+   def new 
+    @article = Article.new
+   end
 
-#   def create
-#   @article = Article
-#   end
+   def create
+    @article = Article.new(article_params)
+    @article.save
+    redirect_to @article
+   end
 
 #   def update
 #   end
@@ -26,10 +28,13 @@ class ArticlesController < ApplicationController
 #   Article 
 #   end
   
-#   private
+   private
 
-#   def atricle_params 
- 
-#   end
+  def article_params 
+    params.require(:article).permit(:title, :description)
+   end
+
+
+
 
  end 
