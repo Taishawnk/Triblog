@@ -8,14 +8,11 @@ before_action :find_article_id, only: [:show, :edit, :update, :destroy]
    @articles = Article.all 
   end 
 
- 
-
    def new 
     @article = Article.new
    end
 
    def edit
-  
    end 
 
    def create
@@ -27,8 +24,6 @@ before_action :find_article_id, only: [:show, :edit, :update, :destroy]
       render 'new'
    end
   end
-
-
 
   def update
     if @article.update(article_params)
@@ -50,7 +45,7 @@ before_action :find_article_id, only: [:show, :edit, :update, :destroy]
     @article = Article.find(params[:id]) 
     end 
 
-  def article_params 
+   def article_params 
     params.require(:article).permit(:title, :description)
    end
 
