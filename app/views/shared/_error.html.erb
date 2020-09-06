@@ -1,0 +1,17 @@
+
+<% if @article.errors.any?%>
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <h2 class="alert-heading"> The following errors are preventing you from saveing! </h2>
+            <ul>
+                 <%@article.errors.full_messages.each do |m|%>
+                 <li> <%=m%> </li>
+                 <%end%>
+            </ul>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+    </div>
+<%end%>
+
+
+<%#created this file just to clean up the _form file this code could be ran in the form file above my <%= form_with( model: @article, local: true do |f|%>
