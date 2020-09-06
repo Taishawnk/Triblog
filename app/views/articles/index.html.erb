@@ -4,17 +4,20 @@
                 <% @articles.each do |a|%>
                 <div class="row justify-content-md-center">
                     <div class="col-8 mt-4">
-                        <div class="card text-center shadow p-3 mb-5 bg-white rounded">
-                        <div class="card-header">
+                        <div class="card text-center shadow mb-5 bg-white rounded">
+                        <div class="card-header font-italic">
                         Who created article
                     </div>
                         <div class="card-body">
-                            <h5 class="card-title"><%= a.title%></td></h5>
-                            <p class="card-text"><%= a.description%></td></p>
-                            <a href="#" class="btn btn-primary">Go somewhere</a>
+                            <h5 class="card-title"><%= link_to a.title, article_path(a), class: "text-success" %></td></h5>
+                            <p class="card-text"><%= truncate(a.description, length: 50)%></td></p>
+                            <%= link_to "View", article_path(a), class: "btn btn-success"%>   
+                            <%= link_to "Edit", edit_article_path(a), class: "btn btn-warning" %>
+                            <%= link_to "Delete", article_path(a), class: "btn btn-danger", method: :delete, data: {confirm: "Are you sure?"} %>
                         </div>
                         <div class="card-footer text-muted">
-                            2 days ago
+                             <small>Created <%= time_ago_in_words(a.created_at) %> ago, 
+                             edited <%= time_ago_in_words(a.updated_at) %> ago</small>
                         </div>
                 </div>
         </div>
