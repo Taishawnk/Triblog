@@ -52,7 +52,7 @@ class ArticlesController < ApplicationController
    end
    
    def require_current_user
-      if current_user != @article.user
+      if current_user != @article.user && !current_user.admin?
          flash[:alert]= "You can only tinker with your own entries "
          redirect_to @article
       end
