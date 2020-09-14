@@ -1,4 +1,7 @@
  <h1 class = "text-center mt-5 font-weight-bold ">TriBlogger`s</h1>
+     <div class="flickr_pagination">
+         <%= will_paginate @users, :container => false %>
+      </div>      
        <div class="container">
                 <% @users.each do |user|%>
                 <div class="row justify-content-md-center">
@@ -11,7 +14,9 @@
                             <h5 class="card-title"><%= link_to gravatar_for(user, size: 150), user %></td></h5>
                             <p class="card-text"><%= pluralize(user.articles.count, "article") %></td></p>
                             <%= link_to "View Profile", user, class: "btn btn-success"%>   
-                            <%= link_to "Edit", edit_user_path(user), class: "btn btn-warning" %>
+                            <%if logged_in? && user == current_user%>
+                                 <%= link_to "Edit", edit_user_path(user), class: "btn btn-warning" %>
+                            <%end%>
                         </div>
                         <div class="card-footer text-muted">
                              <small>Joined <%= time_ago_in_words(user.created_at) %> ago,</small> 
@@ -22,3 +27,9 @@
     </div>
     <%end%>
     </div>   
+     <div class="flickr_pagination mb-4">
+        <div class="page_info mb-2">
+            <%= page_entries_info @users %>
+        </div>
+         <%= will_paginate @users, :container => false %>
+      </div>
