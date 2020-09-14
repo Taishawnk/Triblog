@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
-    before_action :set_user, only: [:show, :edit,:update]
+    before_action :set_user, only: [:show, :edit,:update, :destroy]
     before_action :require_user, only: [:show, :index]
-    before_action :require_current_user, only: [:edit, :update]
+    before_action :require_current_user, only: [:edit, :update, :destroy]
 
     def show 
   
@@ -39,6 +39,13 @@ class UsersController < ApplicationController
     else 
         render 'new'
          end 
+    end
+
+    def destroy 
+         @user.destroy
+         session[:user_id] = nil
+         flash[:notice] = "Sorry to see you go your account and all associated data has been deleted"
+         redirect_to root_path
     end
 
     private 
