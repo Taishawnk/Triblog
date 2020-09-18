@@ -6,7 +6,11 @@
                  <div class="card-header font-italic">
                      by <%= @article.user.username if @article.user%>
                      <%=link_to gravatar_for(@article.user), user_path(@article.user) %>
+                     <% if @article.categories.any? %>
+                          <div class="mt-2"><%=render @article.categories%></div>
+                     <%end%>
                  </div>
+
                 <div class="card-body">
                      <div class="card-text text-left"><%= simple_format(@article.description)%></td></div>
                      <%if logged_in? && @article.user == current_user || current_user.admin? %>  
@@ -14,6 +18,7 @@
                          <%= link_to "Delete", article_path(@article), class: "btn btn-danger", method: :delete, data: {confirm: "Are you sure?"} %>
                      <%end%>
                 </div>
+                
                 <div class="card-footer text-muted">
                      <%= link_to ' [Cancel and Return to Main page]', articles_path, class: "text-danger" %><br>
                      <small>Created <%= time_ago_in_words(@article.created_at) %> ago, 
